@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 
 import Input from './Input';
@@ -30,22 +30,28 @@ const S = {
   `,
 };
 
-const SearchForm = () => (
-  <>
-    <S.Jumbotron as="section">
-      <S.Heading>Gitstar Ranking</S.Heading>
-      <S.Paragraph>
-          Unofficial GitHub star ranking for users, organizations and repositories.
-      </S.Paragraph>
-      <S.Form>
-        <S.Input
-          type="search"
-          placeholder="Github username"
-        />
-        <S.Button type="submit">Search</S.Button>
-      </S.Form>
-    </S.Jumbotron>
-  </>
-);
+const SearchForm = () => {
+  const [value, setValue] = useState('');
+  const handleChange = (e) => setValue(e.target.value);
+  return (
+    <>
+      <S.Jumbotron as="section">
+        <S.Heading>Gitstar Ranking</S.Heading>
+        <S.Paragraph>
+            Unofficial GitHub star ranking for users, organizations and repositories.
+        </S.Paragraph>
+        <S.Form>
+          <S.Input
+            type="search"
+            placeholder="Github username"
+            value={value}
+            onChange={handleChange}
+          />
+          <S.Button type="submit" disabled={!value}>Search</S.Button>
+        </S.Form>
+      </S.Jumbotron>
+    </>
+  );
+};
 
 export default SearchForm;
